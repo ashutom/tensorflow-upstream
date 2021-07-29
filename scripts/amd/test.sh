@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 # ==============================================================================
+
+clear 
+
 set -e
 set -x
 
@@ -52,50 +55,61 @@ bazel test \
       --test_size_filters=small,medium,large \
       --cache_test_results=no \
       --test_env=TF_PER_DEVICE_MEMORY_LIMIT_MB=2048 \
-      -- \
-//tensorflow/core/common_runtime/gpu:gpu_device_unified_memory_test_2gpu \
-//tensorflow/core/kernels:collective_nccl_test_2gpu \
-//tensorflow/core/nccl:nccl_manager_test_2gpu \
-//tensorflow/python/distribute/integration_test:mwms_peer_failure_test_2gpu \
-//tensorflow/python/distribute:checkpoint_utils_test_2gpu \
-//tensorflow/python/distribute:checkpointing_test_2gpu \
-//tensorflow/python/distribute:collective_all_reduce_strategy_test_xla_2gpu \
-//tensorflow/python/distribute:custom_training_loop_gradient_test_2gpu \
-//tensorflow/python/distribute:custom_training_loop_input_test_2gpu \
-//tensorflow/python/distribute:distribute_utils_test_2gpu \
-//tensorflow/python/distribute:input_lib_test_2gpu \
-//tensorflow/python/distribute:input_lib_type_spec_test_2gpu \
-//tensorflow/python/distribute:metrics_v1_test_2gpu \
-//tensorflow/python/distribute:mirrored_variable_test_2gpu \
-//tensorflow/python/distribute:parameter_server_strategy_test_2gpu \
-//tensorflow/python/distribute:ps_values_test_2gpu \
-//tensorflow/python/distribute:random_generator_test_2gpu \
-//tensorflow/python/distribute:test_util_test_2gpu \
-//tensorflow/python/distribute:tf_function_test_2gpu \
-//tensorflow/python/distribute:vars_test_2gpu \
-//tensorflow/python/distribute:warm_starting_util_test_2gpu \
-//tensorflow/python/keras/distribute:collective_all_reduce_strategy_test_2gpu \
-//tensorflow/python/keras/distribute:collective_all_reduce_strategy_test_xla_2gpu \
-//tensorflow/python/keras/distribute:ctl_correctness_test_2gpu \
-//tensorflow/python/keras/distribute:custom_training_loop_optimizer_test_2gpu \
-//tensorflow/python/keras/distribute:keras_metrics_test_2gpu \
-//tensorflow/python/keras/distribute:keras_models_test_2gpu \
-//tensorflow/python/keras/distribute:keras_optimizer_v2_test_2gpu \
-//tensorflow/python/keras/distribute:keras_stateful_lstm_model_correctness_test_2gpu \
-//tensorflow/python/keras/distribute:mirrored_strategy_test_2gpu \
-//tensorflow/python/keras/distribute:mirrored_variable_test_2gpu \
-//tensorflow/python/keras/distribute:multi_worker_test_2gpu \
-//tensorflow/python/keras/layers/preprocessing:category_crossing_distribution_test_2gpu \
-//tensorflow/python/keras/layers/preprocessing:category_encoding_distribution_test_2gpu \
-//tensorflow/python/keras/layers/preprocessing:discretization_distribution_test_2gpu \
-//tensorflow/python/keras/layers/preprocessing:hashing_distribution_test_2gpu \
-//tensorflow/python/keras/layers/preprocessing:image_preprocessing_distribution_test_2gpu \
-//tensorflow/python/keras/layers/preprocessing:index_lookup_distribution_test_2gpu \
-//tensorflow/python/keras/layers/preprocessing:text_vectorization_distribution_test_2gpu \
-//tensorflow/python/keras/utils:multi_gpu_utils_test_2gpu \
-//tensorflow/python/keras/utils:multi_gpu_utils_test_xla_2gpu \
-//tensorflow/python/kernel_tests:dynamic_partition_op_test_2gpu \
-//tensorflow/python/training:saver_test_2gpu \
+      -- //tensorflow/python/keras/layers/preprocessing:category_encoding_distribution_test_2gpu \
+       2>&1 | tee scripts/amd/tf_test.log
+
+
+
+
+
+
+# //tensorflow/python/keras/layers/preprocessing:category_encoding_distribution_test_2gpu \
+
+
+
+# //tensorflow/core/common_runtime/gpu:gpu_device_unified_memory_test_2gpu \
+# //tensorflow/core/kernels:collective_nccl_test_2gpu \
+# //tensorflow/core/nccl:nccl_manager_test_2gpu \
+# //tensorflow/python/distribute/integration_test:mwms_peer_failure_test_2gpu \
+# //tensorflow/python/distribute:checkpoint_utils_test_2gpu \
+# //tensorflow/python/distribute:checkpointing_test_2gpu \
+# //tensorflow/python/distribute:collective_all_reduce_strategy_test_xla_2gpu \
+# //tensorflow/python/distribute:custom_training_loop_gradient_test_2gpu \
+# //tensorflow/python/distribute:custom_training_loop_input_test_2gpu \
+# //tensorflow/python/distribute:distribute_utils_test_2gpu \
+# //tensorflow/python/distribute:input_lib_test_2gpu \
+# //tensorflow/python/distribute:input_lib_type_spec_test_2gpu \
+# //tensorflow/python/distribute:metrics_v1_test_2gpu \
+# //tensorflow/python/distribute:mirrored_variable_test_2gpu \
+# //tensorflow/python/distribute:parameter_server_strategy_test_2gpu \
+# //tensorflow/python/distribute:ps_values_test_2gpu \
+# //tensorflow/python/distribute:random_generator_test_2gpu \
+# //tensorflow/python/distribute:test_util_test_2gpu \
+# //tensorflow/python/distribute:tf_function_test_2gpu \
+# //tensorflow/python/distribute:vars_test_2gpu \
+# //tensorflow/python/distribute:warm_starting_util_test_2gpu \
+# //tensorflow/python/keras/distribute:collective_all_reduce_strategy_test_2gpu \
+# //tensorflow/python/keras/distribute:collective_all_reduce_strategy_test_xla_2gpu \
+# //tensorflow/python/keras/distribute:ctl_correctness_test_2gpu \
+# //tensorflow/python/keras/distribute:custom_training_loop_optimizer_test_2gpu \
+# //tensorflow/python/keras/distribute:keras_metrics_test_2gpu \
+# //tensorflow/python/keras/distribute:keras_models_test_2gpu \
+# //tensorflow/python/keras/distribute:keras_optimizer_v2_test_2gpu \
+# //tensorflow/python/keras/distribute:keras_stateful_lstm_model_correctness_test_2gpu \
+# //tensorflow/python/keras/distribute:mirrored_strategy_test_2gpu \
+# //tensorflow/python/keras/distribute:mirrored_variable_test_2gpu \
+# //tensorflow/python/keras/distribute:multi_worker_test_2gpu \
+# //tensorflow/python/keras/layers/preprocessing:category_crossing_distribution_test_2gpu \
+# //tensorflow/python/keras/layers/preprocessing:category_encoding_distribution_test_2gpu \
+# //tensorflow/python/keras/layers/preprocessing:discretization_distribution_test_2gpu \
+# //tensorflow/python/keras/layers/preprocessing:hashing_distribution_test_2gpu \
+# //tensorflow/python/keras/layers/preprocessing:image_preprocessing_distribution_test_2gpu \
+# //tensorflow/python/keras/layers/preprocessing:index_lookup_distribution_test_2gpu \
+# //tensorflow/python/keras/layers/preprocessing:text_vectorization_distribution_test_2gpu \
+# //tensorflow/python/keras/utils:multi_gpu_utils_test_2gpu \
+# //tensorflow/python/keras/utils:multi_gpu_utils_test_xla_2gpu \
+# //tensorflow/python/kernel_tests:dynamic_partition_op_test_2gpu \
+# //tensorflow/python/training:saver_test_2gpu \
 
 
 
