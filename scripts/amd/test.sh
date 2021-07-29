@@ -15,7 +15,7 @@
 #
 # ==============================================================================
 
-clear 
+clear
 
 set -e
 set -x
@@ -34,7 +34,7 @@ if [[ -n $1 ]]; then
 fi
 
 # Run configure.
-export PYTHON_BIN_PATH=`which python3`
+export PYTHON_BIN_PATH=$(which python3)
 
 export TF_NEED_ROCM=1
 export ROCM_PATH=$ROCM_INSTALL_DIR
@@ -43,29 +43,36 @@ yes "" | $PYTHON_BIN_PATH configure.py
 
 # Run bazel test command. Double test timeouts to avoid flakes.
 bazel test \
-      --config=rocm \
-      -k \
-      --test_tag_filters=-no_gpu,-no_rocm \
-      --jobs=${N_BUILD_JOBS} \
-      --local_test_jobs=${N_TEST_JOBS} \
-      --test_timeout 600,900,2400,7200 \
-      --build_tests_only \
-      --test_output=errors \
-      --test_sharding_strategy=disabled \
-      --test_size_filters=small,medium,large \
-      --cache_test_results=no \
-      --test_env=TF_PER_DEVICE_MEMORY_LIMIT_MB=2048 \
-      -- //tensorflow/python/keras/layers/preprocessing:category_encoding_distribution_test_2gpu \
-       2>&1 | tee scripts/amd/tf_test.log
-
-
-
-
-
+    --config=rocm \
+    -k \
+    --test_tag_filters=-no_gpu,-no_rocm \
+    --jobs=${N_BUILD_JOBS} \
+    --local_test_jobs=${N_TEST_JOBS} \
+    --test_timeout 600,900,2400,7200 \
+    --build_tests_only \
+    --test_output=errors \
+    --test_sharding_strategy=disabled \
+    --test_size_filters=small,medium,large \
+    --cache_test_results=no \
+    --test_env=TF_PER_DEVICE_MEMORY_LIMIT_MB=2048 \
+    -- \
+    //tensorflow/python/distribute:checkpoint_utils_test_2gpu \
+    //tensorflow/python/distribute:collective_all_reduce_strategy_test_xla_2gpu \
+    //tensorflow/python/distribute:custom_training_loop_input_test_2gpu \
+    //tensorflow/python/distribute:metrics_v1_test_2gpu \
+    //tensorflow/python/distribute:parameter_server_strategy_test_2gpu \
+    //tensorflow/python/distribute:random_generator_test_2gpu \
+    //tensorflow/python/distribute:tf_function_test_2gpu \
+    //tensorflow/python/keras/distribute:custom_training_loop_optimizer_test_2gpu \
+    //tensorflow/python/keras/distribute:keras_metrics_test_2gpu \
+    //tensorflow/python/keras/layers/preprocessing:index_lookup_distribution_test_2gpu \
+    //tensorflow/python/keras/layers/preprocessing:category_encoding_distribution_test_2gpu \
+    //tensorflow/python/keras/layers/preprocessing:discretization_distribution_test_2gpu \
+    //tensorflow/python/keras/layers/preprocessing:image_preprocessing_distribution_test_2gpu \
+    //tensorflow/python/keras/layers/preprocessing:text_vectorization_distribution_test_2gpu \
+    2>&1 | tee scripts/amd/tf_test.log
 
 # //tensorflow/python/keras/layers/preprocessing:category_encoding_distribution_test_2gpu \
-
-
 
 # //tensorflow/core/common_runtime/gpu:gpu_device_unified_memory_test_2gpu \
 # //tensorflow/core/kernels:collective_nccl_test_2gpu \
@@ -111,12 +118,9 @@ bazel test \
 # //tensorflow/python/kernel_tests:dynamic_partition_op_test_2gpu \
 # //tensorflow/python/training:saver_test_2gpu \
 
-
-
-
 # no_rocm : //tensorflow/python/keras/distribute:keras_dnn_correctness_test_2gpu \
 # no_rocm : //tensorflow/python/keras/distribute:keras_embedding_model_correctness_test_2gpu \
-      
+
 # TIMEOUT : //tensorflow/python/distribute:values_test_2gpu \
 # TIMEOUT : //tensorflow/python/keras/distribute:keras_image_model_correctness_test_2gpu \
 # TIMEOUT : //tensorflow/python/keras/distribute:keras_rnn_model_correctness_test_2gpu \
