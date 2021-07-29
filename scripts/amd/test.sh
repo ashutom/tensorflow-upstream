@@ -56,21 +56,23 @@ bazel test \
     --cache_test_results=no \
     --test_env=TF_PER_DEVICE_MEMORY_LIMIT_MB=2048 \
     -- \
-    //tensorflow/python/distribute:checkpoint_utils_test_2gpu \
-    //tensorflow/python/distribute:collective_all_reduce_strategy_test_xla_2gpu \
-    //tensorflow/python/distribute:custom_training_loop_input_test_2gpu \
-    //tensorflow/python/distribute:metrics_v1_test_2gpu \
-    //tensorflow/python/distribute:parameter_server_strategy_test_2gpu \
-    //tensorflow/python/distribute:random_generator_test_2gpu \
-    //tensorflow/python/distribute:tf_function_test_2gpu \
-    //tensorflow/python/keras/distribute:custom_training_loop_optimizer_test_2gpu \
-    //tensorflow/python/keras/distribute:keras_metrics_test_2gpu \
-    //tensorflow/python/keras/layers/preprocessing:index_lookup_distribution_test_2gpu \
-    //tensorflow/python/keras/layers/preprocessing:category_encoding_distribution_test_2gpu \
-    //tensorflow/python/keras/layers/preprocessing:discretization_distribution_test_2gpu \
-    //tensorflow/python/keras/layers/preprocessing:image_preprocessing_distribution_test_2gpu \
-    //tensorflow/python/keras/layers/preprocessing:text_vectorization_distribution_test_2gpu \
-    2>&1 | tee /dockerx/tensorflow-upstream/scripts/amd/tf_test.log
+//tensorflow/python/distribute:checkpoint_utils_test_2gpu \
+//tensorflow/python/distribute:collective_all_reduce_strategy_test_xla_2gpu \
+//tensorflow/python/distribute:custom_training_loop_input_test_2gpu \
+//tensorflow/python/distribute:metrics_v1_test_2gpu \
+//tensorflow/python/distribute:parameter_server_strategy_test_2gpu \
+//tensorflow/python/distribute:random_generator_test_2gpu \
+//tensorflow/python/distribute:tf_function_test_2gpu \
+//tensorflow/python/keras/distribute:custom_training_loop_optimizer_test_2gpu \
+//tensorflow/python/keras/distribute:keras_metrics_test_2gpu \
+//tensorflow/python/keras/layers/preprocessing:index_lookup_distribution_test_2gpu \
+//tensorflow/python/keras/layers/preprocessing:category_encoding_distribution_test_2gpu \
+//tensorflow/python/keras/layers/preprocessing:discretization_distribution_test_2gpu \
+//tensorflow/python/keras/layers/preprocessing:image_preprocessing_distribution_test_2gpu \
+//tensorflow/python/keras/layers/preprocessing:text_vectorization_distribution_test_2gpu
+
+# \
+#     2>&1 | tee /dockerx/tensorflow-upstream/scripts/amd/tf_test.log
 
 # //tensorflow/core/common_runtime/gpu:gpu_device_unified_memory_test_2gpu \
 # //tensorflow/core/kernels:collective_nccl_test_2gpu \

@@ -1649,7 +1649,6 @@ cuda_py_test(
     python_version = "PY3",
     tags = [
         "multi_and_single_gpu",
-        "no_rocm",  #Re-enable when fixed
         "nomsan",  # b/154224457: Re-enable when fixed.
     ],
     # b/155301154 broken with XLA:GPU
