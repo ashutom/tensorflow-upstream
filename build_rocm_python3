@@ -10,12 +10,16 @@
 #
 
 # First positional argument (if any) specifies the ROCM_INSTALL_DIR
-ROCM_INSTALL_DIR=/opt/rocm-4.2.0
+#ROCM_INSTALL_DIR=/opt/rocm-4.2.0
+ROCM_INSTALL_DIR=/opt/rocm
 if [[ -n $1 ]]; then
     ROCM_INSTALL_DIR=$1
 fi
 
+echo " Ashutosh ROCM_INSTALL_DIR= $ROCM_INSTALL_DIR"
 ROCM_PATH=$ROCM_INSTALL_DIR
+echo " Ashutosh ROCM_PATH= $ROCM_PATH"
+
 
 # Explicitly delete the old whl packages in the /tmp/tensorflow_pkg dir
 # Doing so comes in handy when the TF version number changes, because
